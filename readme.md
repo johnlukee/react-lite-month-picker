@@ -1,4 +1,4 @@
-# React Lite Month Picker
+# Re3ve Month Picker
 
 ![https://img.shields.io/npm/dw/react-lite-month-picker](https://img.shields.io/npm/dw/react-lite-month-picker) ![npm](https://img.shields.io/npm/v/react-lite-month-picker) ![GitHub top language](https://img.shields.io/github/languages/top/henripar/react-lite-month-picker) ![GitHub](https://img.shields.io/github/license/henripar/react-lite-month-picker)
 
@@ -6,14 +6,15 @@ Simple, modern and customizable month picker component for ReactJS.
 
 ![React Lite Month Picker](https://www.react-lite-month-picker.dev/header-cover.png)
 
-## Features
+## ✨ Features
 
-&#128512; **Simple and easy to use.**  
-&#127798; **Tiny**: Minzipped size less than 1kB.  
-&#129473; **Highly customizable**: Easily make it fit to your designs.  
-&#128197; **Accessible**: Fully accessible with keyboard navigation. Developed according the WCAG 2.1 accesibility guidelines.  
-🇫🇮 **41 languages** supported.  
-&#128683; **0 Dependencies**: No surprise dependencies included.
+✅ **React 18 Compatible**  
+🧠 **Written in TypeScript**  
+⚡ **Lightweight**: No runtime dependencies  
+🎨 **Customizable via CSS Variables**  
+🌍 **Supports 40+ languages (via Intl API)**  
+♿ **Accessible (WCAG 2.1 compliant)**
+
 
 ## Installation
 
@@ -43,8 +44,8 @@ import { MonthPicker, MonthInput } from 'react-lite-month-picker';
 
 function Example() {
   const [selectedMonthData, setSelectedMonthData] = useState({
-    month: 9,
-    year: 2023,
+    month: 4,
+    year: 2025,
   });
   const [isPickerOpen, setIsPickerOpen] = useState(false);
 
@@ -77,10 +78,10 @@ Currently selected month data is an object with the following structure:
 
 ```js
 {
-  month: 9,
-  year: 2023,
-  monthName: 'September',
-  monthShort: 'Sep'
+  month: 4,
+  year: 2025,
+  monthName: 'April',
+  monthShort: 'apr'
 }
 ```
 

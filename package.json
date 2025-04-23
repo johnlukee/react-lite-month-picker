@@ -1,26 +1,32 @@
 {
-  "name": "react-lite-month-picker",
-  "version": "1.2.18",
-  "description": "Simple, modern and customizable month picker component for ReactJS.",
-  "main": "src/index.js",
+  "name": "re3ve-month-picker",
+  "version": "2.0.1",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "description": "Simple, modern and customizable month picker component for React.",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc",
+    "dev": "tsc --watch"
   },
   "keywords": [
     "react",
-    "react-month-picker",
     "month-picker",
-    "month",
-    "picker"
+    "datepicker",
+    "typescript"
   ],
-  "author": "Henri Parviainen",
+  "author": "Henri Parviainen and João Lucas",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/henripar/react-lite-month-picker"
+    "url": "https://github.com/johnlukee/react-lite-month-picker"
   },
-  "homepage": "https://www.react-lite-month-picker.dev",
   "peerDependencies": {
-    "react": "^18.2.0"
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "@types/react": "^18.0.37",
+    "@types/react-dom": "^18.0.11"
   }
 }
