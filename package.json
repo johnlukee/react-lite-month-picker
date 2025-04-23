@@ -1,11 +1,11 @@
 {
   "name": "re3ve-month-picker",
-  "version": "2.0.1",
+  "version": "2.0.3",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "description": "Simple, modern and customizable month picker component for React.",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && cp -r src/styles dist/styles",
     "dev": "tsc --watch"
   },
   "keywords": [
@@ -13,6 +13,12 @@
     "month-picker",
     "datepicker",
     "typescript"
+  ],
+  "files": [
+    "dist",
+    "dist/styles",
+    "README.md",
+    "LICENSE"
   ],
   "author": "Henri Parviainen and João Lucas",
   "license": "MIT",

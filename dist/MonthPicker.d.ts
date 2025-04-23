@@ -1,22 +1,29 @@
 import "./styles/global.css";
-export interface MonthPickerProps {
-    selected: {
-        month?: number;
-        year?: number;
-    };
-    onChange: (value: {
-        month: number;
+export type SelectedRange = {
+    from?: {
         year: number;
-        monthName: string;
-        monthShortName: string;
-    }) => void;
-    setIsOpen: (val: boolean) => void;
+        month: number;
+    };
+    to?: {
+        year: number;
+        month: number;
+    };
+};
+export type MonthPickerClassNames = {
+    wrapper?: string;
+    header?: string;
+    navButton?: string;
+    yearLabel?: string;
+    monthGrid?: string;
+    monthButton?: string;
+    monthButtonActive?: string;
+    monthButtonRange?: string;
+};
+export interface MonthPickerProps {
+    value?: SelectedRange;
+    disableFuture?: boolean;
+    onChange?: (range: SelectedRange) => void;
     lang?: string;
-    size?: "small" | "large";
-    bgColorMonthActive?: string;
-    bgColorMonthHover?: string;
-    borderRadiusMonth?: string;
-    bgColorPicker?: string;
-    textColor?: string;
+    classNames?: Partial<MonthPickerClassNames>;
 }
-export declare function MonthPicker(props: MonthPickerProps): import("react/jsx-runtime").JSX.Element;
+export declare function MonthPicker({ value, disableFuture, onChange, lang, classNames, }: MonthPickerProps): import("react/jsx-runtime").JSX.Element;

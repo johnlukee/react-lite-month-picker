@@ -15,8 +15,7 @@ Simple, modern and customizable month picker component for ReactJS.
 🌍 **Supports 40+ languages (via Intl API)**  
 ♿ **Accessible (WCAG 2.1 compliant)**
 
-
-## Installation
+## 📥 Installation
 
 **Using npm:**
 
@@ -36,36 +35,25 @@ yarn add react-lite-month-picker
 bun install react-lite-month-picker
 ```
 
-## Usage
+## 💻 Usage
 
 ```jsx
-import { useState } from 'react';
-import { MonthPicker, MonthInput } from 'react-lite-month-picker';
+import { useState } from "react";
+import { MonthPicker, MonthInput } from "re3ve-month-picker";
 
 function Example() {
   const [selectedMonthData, setSelectedMonthData] = useState({
     month: 4,
     year: 2025,
   });
-  const [isPickerOpen, setIsPickerOpen] = useState(false);
 
   return (
-    <>
-      <div>
-        <MonthInput
-          selected={selectedMonthData}
-          setShowMonthPicker={setIsPickerOpen}
-          showMonthPicker={isPickerOpen}
-        />
-        {isPickerOpen ? (
-          <MonthPicker
-            setIsOpen={setIsPickerOpen}
-            selected={selectedMonthData}
-            onChange={setSelectedMonthData}
-          />
-        ) : null}
-      </div>
-    </>
+    <div>
+      <MonthPicker
+        selected={selectedMonthData}
+        onChange={setSelectedMonthData}
+      />
+    </div>
   );
 }
 
@@ -89,31 +77,39 @@ It will get saved on set parent component state with `onChange` event.
 
 ## Customization
 
-You can customize the `MonthPicker` component styles by passing props to it.
+You can customize the behavior and styles of the `MonthPicker` component via props.
 
-| Prop name            | Description                                        | Default value |
-| -------------------- | -------------------------------------------------- | ------------- |
-| `bgColorMonthActive` | Background color of the active month.              | `#4ea3983e`   |
-| `bgColorMonthHover`  | Background color of the month on mouse hover.      | `#f4f4f4`     |
-| `borderRadiusMonth`  | Border radius of the moth element.                 | `7px`         |
-| `bgColorPicker `     | Background color of the picker element.            | `#fff`        |
-| `textColor`          | Color of the text.                                 | `#000`        |
-| `size`               | Size of the component. Accepts 'small' or 'large'. | `large`       |
-| `lang`               | Language. Accepts ISO 639-1 language code.         | `en`          |
+### 🧩 Behavior Props
 
-\
-\
-You can customize the `MonthInput` component styles by passing props to it.
+| Prop name       | Description                                              | Type                                               | Default     |
+| --------------- | -------------------------------------------------------- | -------------------------------------------------- | ----------- |
+| `value`         | The current selected range `{ from, to }`                | `{ from?: { year, month }, to?: { year, month } }` | `undefined` |
+| `onChange`      | Callback fired on selection change                       | `(range: { from, to }) => void`                    | —           |
+| `lang`          | Language locale used to format month names (uses `Intl`) | `string`                                           | `'en'`      |
+| `disablePast`   | Disables months before the current month                 | `boolean`                                          | `false`     |
+| `disableFuture` | Disables months after the current month                  | `boolean`                                          | `false`     |
+| `minMonth`      | Disables all months before a specific `{ year, month }`  | `{ year: number; month: number }`                  | —           |
+| `maxMonth`      | Disables all months after a specific `{ year, month }`   | `{ year: number; month: number }`                  | —           |
+| `disableMonths` | Custom logic to disable specific months dynamically      | `(month: { year, month }) => boolean`              | —           |
 
-| Prop name      | Description                                           | Default value |
-| -------------- | ----------------------------------------------------- | ------------- |
-| `bgColor`      | Background color of the input element.                | `#fff`        |
-| `bgColorHover` | Background color of the input element on mouse hover. | `#fff`        |
-| `textColor`    | Color of the text.                                    | `#000`        |
-| `size`         | Size of the component. Accepts 'small' or 'large'.    | `large`       |
-| `lang`         | Language. Accepts ISO 639-1 language code.            | `en`          |
+---
 
-See full list of supported languages on the [website](https://www.react-lite-month-picker.dev/).
+### 🎨 Styling with `classNames`
+
+You can style the component using the `classNames` prop. It accepts an object with the following optional keys:
+
+```ts
+type MonthPickerClassNames = {
+  wrapper?: string;
+  header?: string;
+  navButton?: string;
+  yearLabel?: string;
+  monthGrid?: string;
+  monthButton?: string;
+  monthButtonActive?: string;
+  monthButtonRange?: string;
+};
+```
 
 ## License
 
