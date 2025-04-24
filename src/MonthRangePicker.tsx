@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { cn } from "./utils/classnames";
 import "./styles/global.css";
-import { dateToMonthObject, getFirstDayOfMonth } from "./utils/date";
+import {
+  dateToMonthObject,
+  getFirstDayOfMonth,
+  getLastDayOfMonth,
+} from "./utils/date";
 
 export type SelectedRange = {
   from?: { year: number; month: number };
@@ -75,7 +79,7 @@ export function MonthRangePicker({
       setRange(next);
       onChange?.({
         from: getFirstDayOfMonth(next?.from),
-        to: getFirstDayOfMonth(next?.to),
+        to: getLastDayOfMonth(next?.to),
       });
     } else {
       const fromDate = new Date(range.from.year, range.from.month - 1);
@@ -89,7 +93,7 @@ export function MonthRangePicker({
       setRange(final);
       onChange?.({
         from: getFirstDayOfMonth(final?.from),
-        to: getFirstDayOfMonth(final?.to),
+        to: getLastDayOfMonth(final?.to),
       });
     }
   };
@@ -171,7 +175,7 @@ export function MonthRangePicker({
         </button>
       </div>
 
-      <div className={cn("grid grid-cols-3 gap-2", classNames.monthGrid)}>
+      <div className={cn(classNames.monthGrid)}>
         {getMonthNames().map((name, i) => {
           const disabled = isDisabledMonth(i);
           const selected = isSelected(i);
@@ -183,7 +187,6 @@ export function MonthRangePicker({
               type="button"
               disabled={disabled}
               className={cn(
-                "text-sm rounded px-2 py-1",
                 classNames.monthButton,
                 selected && classNames.monthButtonActive,
                 middle && classNames.monthButtonRange,

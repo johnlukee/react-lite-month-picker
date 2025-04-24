@@ -20,19 +20,19 @@ Simple, modern and customizable month picker component for ReactJS.
 **Using npm:**
 
 ```bash
-npm install react-lite-month-picker --save
+npm install re3ve-month-picker --save
 ```
 
 **Using yarn:**
 
 ```bash
-yarn add react-lite-month-picker
+yarn add re3ve-month-picker
 ```
 
 **Using bun:**
 
 ```bash
-bun install react-lite-month-picker
+bun install re3ve-month-picker
 ```
 
 ## 💻 Usage
@@ -66,10 +66,8 @@ Currently selected month data is an object with the following structure:
 
 ```js
 {
-  month: 4,
-  year: 2025,
-  monthName: 'April',
-  monthShort: 'apr'
+  from: 'Thu Apr 24 2025 20:05:27 GMT-0300 (Brasilia Standard Time)';
+  to: 'Thu Apr 24 2025 20:05:27 GMT-0300 (Brasilia Standard Time)';
 }
 ```
 
@@ -77,7 +75,21 @@ It will get saved on set parent component state with `onChange` event.
 
 ## Customization
 
-You can customize the behavior and styles of the `MonthPicker` component via props.
+You can customize the behavior and styling of the `MonthPicker` using the following props:
+
+### 📅 Value & onChange
+
+The component works with JavaScript `Date` objects for range selection:
+
+- `from`: represents the **first day** of the selected start month
+- `to`: represents the **last day** of the selected end month
+
+```ts
+type MonthDateRange = {
+  from?: Date;
+  to?: Date;
+}
+```
 
 ### 🧩 Behavior Props
 
@@ -109,6 +121,26 @@ type MonthPickerClassNames = {
   monthButtonActive?: string;
   monthButtonRange?: string;
 };
+```
+
+#### Example with Tailwind:
+
+```ts
+<MonthPicker
+  value={range}
+  onChange={setRange}
+  classNames={{
+    wrapper: 'bg-white p-4 rounded-md border shadow',
+    header: 'flex justify-between items-center mb-2',
+    navButton: 'text-gray-500 hover:text-black',
+    yearLabel: 'text-lg font-semibold',
+    monthGrid: 'grid-cols-4 gap-2',
+    monthButton: 'text-sm text-gray-700 hover:bg-slate-100',
+    monthButtonActive: 'bg-blue-600 text-white',
+    monthButtonRange: 'bg-blue-200 text-blue-900',
+  }}
+/>
+
 ```
 
 ## License

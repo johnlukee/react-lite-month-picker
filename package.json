@@ -1,6 +1,6 @@
 {
   "name": "re3ve-month-picker",
-  "version": "2.1.1",
+  "version": "2.1.4",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "description": "Simple, modern and customizable month picker component for React.",
