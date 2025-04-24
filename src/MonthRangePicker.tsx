@@ -1,10 +1,16 @@
 import React, { useState } from "react";
 import { cn } from "./utils/classnames";
 import "./styles/global.css";
+import { dateToMonthObject, getFirstDayOfMonth } from "./utils/date";
 
 export type SelectedRange = {
   from?: { year: number; month: number };
   to?: { year: number; month: number };
+};
+
+export type MonthDateRange = {
+  from: Date | undefined;
+  to?: Date | undefined;
 };
 
 export type MonthPickerClassNames = {
@@ -19,8 +25,8 @@ export type MonthPickerClassNames = {
 };
 
 export interface MonthPickerProps {
-  value?: SelectedRange;
-  onChange?: (range: SelectedRange) => void;
+  value: MonthDateRange;
+  onChange?: (range: MonthDateRange) => void;
   lang?: string;
   classNames?: Partial<MonthPickerClassNames>;
   disableFuture?: boolean;
@@ -41,11 +47,13 @@ export function MonthRangePicker({
   onChange,
   disableMonths,
 }: MonthPickerProps) {
-  const [year, setYear] = useState(
-    value?.from?.year ?? new Date().getFullYear()
+  const [year, setYear] = useState(() =>
+    value?.from ? value.from.getFullYear() : new Date().getFullYear()
   );
-  const [range, setRange] = useState<SelectedRange>(value ?? {});
-
+  const [range, setRange] = useState<SelectedRange>({
+    from: dateToMonthObject(value?.from),
+    to: dateToMonthObject(value?.to),
+  });
   const getMonthNames = () => {
     const formatter = new Intl.DateTimeFormat(lang, {
       month: "short",
@@ -57,12 +65,18 @@ export function MonthRangePicker({
   };
 
   const handleSelect = (monthIndex: number) => {
-    const selected = { year, month: monthIndex + 1 };
+    const selected: { year: number; month: number } = {
+      year: year,
+      month: monthIndex + 1,
+    };
 
     if (!range.from || (range.from && range.to)) {
       const next = { from: selected, to: undefined };
       setRange(next);
-      onChange?.(next);
+      onChange?.({
+        from: getFirstDayOfMonth(next?.from),
+        to: getFirstDayOfMonth(next?.to),
+      });
     } else {
       const fromDate = new Date(range.from.year, range.from.month - 1);
       const toDate = new Date(selected.year, selected.month - 1);
@@ -73,7 +87,10 @@ export function MonthRangePicker({
           : { from: selected, to: range.from };
 
       setRange(final);
-      onChange?.(final);
+      onChange?.({
+        from: getFirstDayOfMonth(final?.from),
+        to: getFirstDayOfMonth(final?.to),
+      });
     }
   };
 
@@ -159,7 +176,6 @@ export function MonthRangePicker({
           const disabled = isDisabledMonth(i);
           const selected = isSelected(i);
           const middle = isRangeMiddle(i);
-          console.log("middle:", middle, "name", name);
 
           return (
             <button
