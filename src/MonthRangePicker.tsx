@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+
 import { cn } from "./utils/classnames";
 import "./styles/global.css";
 import {
@@ -10,6 +12,11 @@ import {
 export type SelectedRange = {
   from?: { year: number; month: number };
   to?: { year: number; month: number };
+};
+
+export type MonthObject = {
+  year: number;
+  month: number;
 };
 
 export type MonthDateRange = {
@@ -35,9 +42,9 @@ export interface MonthPickerProps {
   classNames?: Partial<MonthPickerClassNames>;
   disableFuture?: boolean;
   disablePast?: boolean;
-  minMonth?: { year: number; month: number };
-  maxMonth?: { year: number; month: number };
-  disableMonths?: (month: { year: number; month: number }) => boolean;
+  minMonth?: MonthObject;
+  maxMonth?: MonthObject;
+  disableMonths?: (month: MonthObject) => boolean;
 }
 
 export function MonthRangePicker({
@@ -59,13 +66,14 @@ export function MonthRangePicker({
     to: dateToMonthObject(value?.to),
   });
   const getMonthNames = () => {
-    const formatter = new Intl.DateTimeFormat(lang, {
-      month: "short",
-      timeZone: "UTC",
+    return Array.from({ length: 12 }, (_, i) => {
+      const date = new Date(2023, i, 1);
+      let label = date.toLocaleString(lang, { month: "long" });
+
+      label = label.charAt(0).toUpperCase() + label.slice(1, 3);
+
+      return label;
     });
-    return Array.from({ length: 12 }, (_, i) =>
-      formatter.format(new Date(Date.UTC(2023, i, 1)))
-    );
   };
 
   const handleSelect = (monthIndex: number) => {
@@ -152,7 +160,7 @@ export function MonthRangePicker({
     <div className={cn("p-3 w-full max-w-sm", classNames.wrapper)}>
       <div
         className={cn(
-          "flex items-center justify-between mb-4",
+          "flex items-center justify-between mb-1",
           classNames.header
         )}
       >
@@ -161,7 +169,7 @@ export function MonthRangePicker({
           className={cn("text-sm px-2", classNames.navButton)}
           onClick={() => setYear((y) => y - 1)}
         >
-          &lt;
+          <ChevronLeft className="h-4" />
         </button>
         <span className={cn("text-base font-medium", classNames.yearLabel)}>
           {year}
@@ -171,7 +179,7 @@ export function MonthRangePicker({
           className={cn("text-sm px-2", classNames.navButton)}
           onClick={() => setYear((y) => y + 1)}
         >
-          &gt;
+          <ChevronRight className="h-4" />
         </button>
       </div>
 

@@ -1,6 +1,6 @@
 {
   "name": "re3ve-month-picker",
-  "version": "2.1.4",
+  "version": "2.1.9",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "description": "Simple, modern and customizable month picker component for React.",
@@ -31,8 +31,11 @@
     "react-dom": "^18.0.0"
   },
   "devDependencies": {
-    "typescript": "^5.4.0",
     "@types/react": "^18.0.37",
-    "@types/react-dom": "^18.0.11"
+    "@types/react-dom": "^18.0.11",
+    "typescript": "^5.4.0"
+  },
+  "dependencies": {
+    "lucide-react": "^0.503.0"
   }
 }
